@@ -1,0 +1,19 @@
+# systemd user unit: ~/.config/systemd/user/keyhaven-server.service
+[Unit]
+Description=Keyhaven password manager server
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/keyhaven-server serve
+Environment=KEYHAVEN_BIND=127.0.0.1:8743
+Environment=KEYHAVEN_DATA=%h/.local/share/keyhaven
+Environment=KEYHAVEN_SIGNUPS=invite
+Environment=KEYHAVEN_TRUST_PROXY=1
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=yes
+UMask=0077
+
+[Install]
+WantedBy=default.target

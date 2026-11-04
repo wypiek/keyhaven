@@ -1,0 +1,17 @@
+# build output
+/dist/
+/server/target/
+/server/static/
+
+# local data and secrets
+/server/data/
+data/
+*.db
+*.db-wal
+*.db-shm
+/keys/*.pem
+.env
+
+# tooling
+node_modules/
+.DS_Store

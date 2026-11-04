@@ -1,0 +1,15 @@
+# Keyhaven on this laptop: https://keyhaven.localhost:8443
+# Loopback only. Nothing is reachable from the network.
+{
+	admin 127.0.0.1:2219
+	local_certs
+	skip_install_trust
+	auto_https disable_redirects
+}
+
+https://keyhaven.localhost:8443 {
+	bind 127.0.0.1 ::1
+	tls internal
+	encode gzip
+	reverse_proxy 127.0.0.1:8743
+}

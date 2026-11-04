@@ -1,0 +1,17 @@
+# systemd user unit: ~/.config/systemd/user/keyhaven-caddy.service
+[Unit]
+Description=Caddy HTTPS proxy for Keyhaven
+After=network.target keyhaven-server.service
+Wants=keyhaven-server.service
+
+[Service]
+Type=notify
+ExecStart=%h/.local/bin/caddy run --environ --config %h/.config/keyhaven/Caddyfile --adapter caddyfile
+ExecReload=%h/.local/bin/caddy reload --config %h/.config/keyhaven/Caddyfile --adapter caddyfile --force
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=yes
+TimeoutStopSec=5s
+
+[Install]
+WantedBy=default.target
